@@ -1,6 +1,3 @@
-Here’s the README file written in Markdown format:
-
-markdown
 # Music Recommender Web App  
 
 This is a Music Recommender Web App that uses Spotify's API to recommend music based on user preferences. Follow the steps below to set up and run the application on your local system.  
