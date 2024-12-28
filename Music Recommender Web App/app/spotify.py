@@ -3,8 +3,8 @@ from spotipy.oauth2 import SpotifyOAuth
 from random import random,choice
 
 # Spotify API credentials
-CLIENT_ID = '4478604cd29f405780a5310c96a3cd23'
-CLIENT_SECRET = '31d36da3c5f34b2d82f181ad0a4b4597'
+CLIENT_ID = 'CLIENT_ID'
+CLIENT_SECRET = 'CLIENT_SECRET'
 REDIRECT_URI = 'http://localhost:8888/callback'
 SCOPE = 'user-library-read user-top-read playlist-modify-public'
 
