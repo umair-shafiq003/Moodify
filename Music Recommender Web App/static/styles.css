@@ -1,7 +1,10 @@
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0a8131, #9af30b);
-    color: #fff;
+    font-family: 'Roboto Condensed';
+    /*Arial, sans-serif;
+    background: linear-gradient(135deg, #0a8131, #9af30b);*/
+    background-image: url(../cloud.jpg);
+    background-size: cover;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +14,7 @@ body {
 
 .container {
     text-align: center;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(255, 255, 255, 0.493);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -39,13 +42,13 @@ input[type="text"] {
     padding: 10px;
     margin-bottom: 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     font-size: 1rem;
 }
 
 button {
     padding: 10px 20px;
-    background-color: #ff6f61;
+    background-color: black;
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -55,5 +58,5 @@ button {
 }
 
 button:hover {
-    background-color: #ff3d3d;
+    background-color: #F0C1E1;
 }

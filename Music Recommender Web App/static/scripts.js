@@ -40,6 +40,14 @@ document.getElementById("submitBtn").addEventListener("click", async function ()
     }
 });
 
+document.getElementById("clearBtn").addEventListener("click", function () {
+    // Clear the results and music recommendations
+    document.getElementById("results").innerHTML = "";
+    document.getElementById("musicResults").innerHTML = "";
+    // Clear the user input field
+    document.getElementById("userInput").value = "";
+});
+
 // Function to fetch playlist recommendations
 async function getPlaylistRecommendations(mood) {
     try {
@@ -57,20 +65,17 @@ async function getPlaylistRecommendations(mood) {
 
 // Function to display playlist recommendations
 function displayPlaylistResults(playlists) {
-    const playlistResultsDiv = document.createElement("div");
-    playlistResultsDiv.innerHTML = "<h3>Playlist Recommendations:</h3>";
+    const musicResultsDiv = document.getElementById("musicResults");
+    musicResultsDiv.innerHTML = "<h3>Playlist Recommendations:</h3>";
 
     if (playlists.length === 0) {
-        playlistResultsDiv.innerHTML += "<p>No playlists found.</p>";
+        musicResultsDiv.innerHTML += "<p>No playlists found.</p>";
         return;
     }
 
     playlists.forEach(playlist => {
         const playlistElement = document.createElement("p");
         playlistElement.innerHTML = `<a href="${playlist.link}" target="_blank">${playlist.name}</a>`;
-        playlistResultsDiv.appendChild(playlistElement);
+        musicResultsDiv.appendChild(playlistElement);
     });
-
-    const musicResultsDiv = document.getElementById("musicResults");
-    musicResultsDiv.appendChild(playlistResultsDiv);
 }

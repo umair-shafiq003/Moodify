@@ -1,6 +1,6 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from random import random,choice
+import random
 
 # Spotify API credentials
 CLIENT_ID = '4478604cd29f405780a5310c96a3cd23'
@@ -17,45 +17,40 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     cache_path=".cache"  # Caches token for reuse
 ))
 
-import random
-import spotipy
-from spotipy.oauth2 import SpotifyOAuth
-
-import random
-
 # Updated mood-to-playlist mapping
 MOOD_PLAYLIST_MAP = {
-    'joy': ['party'], 
-            
-    'sadness': ['melancholy', 
-                'chill',
-                'sad'],  
-                    
-    'neutral': ['focus',      # Playlists for study, focus, or relaxation
-                'chillhop',    # Lo-fi and chill hip-hop for concentration
-                'ambient',     # Calm, instrumental music for background relaxation
-                'acoustic']    # Soothing acoustic tracks for unwinding
+    'joy': ['party', 'happy', 'dance'],  # Keywords for joyful moods
+    'sadness': ['chill', 'sad', 'melancholy'],  
+    'neutral': ['focus', 'chillhop', 'ambient', 'acoustic']  # Relaxation or neutral vibes
 }
 
 def get_playlist_recommendations(mood):
-    """Fetch playlist recommendations based on mood, randomly selecting from mapped genres."""
+    """Fetch playlist recommendations based on mood."""
     # Get playlist categories for the given mood and pick one randomly
-    mood_query = random.choice(MOOD_PLAYLIST_MAP.get(mood, ['happy']))  # Default to 'happy' if mood not found
-    try:
-        print(f"Searching playlists for mood: {mood_query}")  # Debug log
-        results = sp.search(q=f'playlist {mood_query}', type='playlist', limit=5)
-        print(f"API Response: {results}")  # Debug log
+    mood_query = random.choice(MOOD_PLAYLIST_MAP.get(mood, ['neutral']))
 
-        return [
+    try:
+        print(f"Searching playlists for mood: {mood_query}")
+        results = sp.search(q=f'playlist {mood_query}', type='playlist', limit=10)
+
+        # Parse and format the response, safely handling missing data
+        playlists = [
             {
-                'name': playlist['name'],
-                'link': playlist['external_urls']['spotify']
+                'name': playlist.get('name', 'Unknown Playlist'),
+                'link': playlist.get('external_urls', {}).get('spotify', 'No URL available')
             }
-            for playlist in results['playlists']['items']
+            for playlist in results.get('playlists', {}).get('items', [])
+            if playlist  # Filter out None values
         ]
+
+        if not playlists:  # Handle empty results
+            return [{'error': f'No playlists found for mood: {mood_query}'}]
+
+        return playlists
+
     except spotipy.exceptions.SpotifyException as e:
         print(f"Spotify API error: {e}")
-        return [{'error': 'Failed to fetch playlists'}]
+        return [{'error': 'Failed to fetch playlists from Spotify API'}]
     except Exception as e:
         print(f"Unexpected error: {e}")
-        return [{'error': 'An unexpected error occurred'}]
+        return [{'error': f'An unexpected error occurred: {str(e)}'}]

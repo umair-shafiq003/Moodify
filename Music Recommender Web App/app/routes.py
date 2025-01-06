@@ -22,6 +22,13 @@ def js():
         html_content = file.read()
     return Response(html_content, content_type='text/js')
 
+@app.route("/cloud.jpg")
+def pic():
+    with open('cloud.jpg', 'rb') as file:  
+        image_data = file.read()
+    return Response(image_data, content_type='image/jpeg')
+
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
