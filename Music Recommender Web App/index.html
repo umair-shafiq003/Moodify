@@ -9,15 +9,51 @@
 <body>
     <div class="container">
         <h1>Moodify</h1>
-        <p>how are you feeling today..? 😉</p>
+        <p>How are you feeling today..?</p>
         <div class="form-container">
             <input 
                 id="userInput" 
                 type="text" 
                 placeholder="Type here..." 
                 required>
-            <button id="submitBtn">Prepare Music</button>
-            <button id="clearBtn">clear <Output></Output></button>
+            <div class="buttons">
+                <button id="submitBtn" class="blob-btn">
+                    Prepare Music
+                    <span class="blob-btn__inner">
+                        <span class="blob-btn__blobs">
+                            <span class="blob-btn__blob"></span>
+                            <span class="blob-btn__blob"></span>
+                            <span class="blob-btn__blob"></span>
+                            <span class="blob-btn__blob"></span>
+                        </span>
+                    </span>
+                </button>
+                <button id="clearBtn" class="blob-btn">
+                    Clear
+                    <span class="blob-btn__inner">
+                        <span class="blob-btn__blobs">
+                            <span class="blob-btn__blob"></span>
+                            <span class="blob-btn__blob"></span>
+                            <span class="blob-btn__blob"></span>
+                            <span class="blob-btn__blob"></span>
+                        </span>
+                    </span>
+                </button>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none">
+                <defs>
+                    <filter id="goo">
+                        <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+                        <feColorMatrix in="blur" mode="matrix" 
+                            values="1 0 0 0 0  
+                                    0 1 0 0 0  
+                                    0 0 1 0 0  
+                                    0 0 0 18 -7" result="goo">
+                        </feColorMatrix>
+                        <feBlend in="SourceGraphic" in2="goo"></feBlend>
+                    </filter>
+                </defs>
+            </svg>
         </div>
         <div id="results" class="results">
             <!-- Mood prediction will be displayed here -->
