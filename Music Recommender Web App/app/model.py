@@ -3,7 +3,7 @@ import tensorflow as tf
 
 # Load the model and tokenizer
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-model = TFBertForSequenceClassification.from_pretrained("D:/UMAIR/CSCS 456 Intro To Deep Learning/Moodify_Proj/bert-emotions-tf")
+model = TFBertForSequenceClassification.from_pretrained("PATH_TO_MODEL")
 
 def predict_mood(text):
     inputs = tokenizer(text, return_tensors="tf", truncation=True, padding=True)
